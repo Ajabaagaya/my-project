@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/extra.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="icon" href="{% static 'img/mdb-favicon.ico' %}" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+    <!-- Dark MDB theme -->
+    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+        function GetToken(name) {
+            var cookiesValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookiesValue = decodeURIComponent(cookie.substring(name.length + 1))
+                        break;
+                    }
+                }
+            }
+            return cookiesValue;
+        }
+        var csrftoken = GetToken('csrftoken');
+    </script>
+
+    <!-- Bootstrap core CSS -->
+    <style type="text/css">
+        html,
+        body,
+        header,
+        .carousel {
+            height: 60vh;
+        }
+
+        @media (max-width: 740px) {
+
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+
+        @media (min-width: 800px) and (max-width: 850px) {
+
+            html,
+            body,
+            header,
+            .carousel {
+                height: 100vh;
+            }
+        }
+    </style>
+</head>
+<!-- {% if messages %}
+{% for message in messages %}
+<b class="alert alert-{{ messages.tags }}">
+    {{ message }}
+</b>
+{% endfor %}
+{% endif %} -->
+
+<body class="m-5  p-5 ">
+
+    {% load static %}
+
+  
+
+    <!-- Navbar -->
+    <!-- <style>
+    span,
+    input {
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .search {
+        left: calc(75%);
+        position: absolute;
+    }
+
+    .logout {
+        left: calc(88%);
+        position: fixed;
+    }
+
+    #cart {
+        width: 25px;
+        display: inline-block;
+        margin-left: 15px;
+
+    }
+
+    #cart-total {
+        display: block;
+        text-align: center;
+        color: #fff;
+        background-color: red;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 14px;
+    } -->
+
+
+
+    {% load static %}
+
+    <!-- Navbar -->
+    <!-- <style>
+    span,
+    input {
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .search {
+        left: calc(75%);
+        position: absolute;
+    }
+
+    .logout {
+        left: calc(88%);
+        position: fixed;
+    }
+
+    #cart {
+        width: 25px;
+        display: inline-block;
+        margin-left: 15px;
+
+    }
+
+    #cart-total {
+        display: block;
+        text-align: center;
+        color: #fff;
+        background-color: red;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 14px;
+    } -->
+
+
+    <style>
+        .input-group {
+            left: -95px;
+        }
+
+        .abd {
+            float: left;
+            margin-left: -15px;
+            margin-right: 30px;
+        }
+    </style>
+
+
+
+
+<!-- Navbar -->
+<!-- <style>
+    span,
+    input {
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .search {
+        left: calc(75%);
+        position: absolute;
+    }
+
+    .logout {
+        left: calc(88%);
+        position: fixed;
+    }
+
+    #cart {
+        width: 25px;
+        display: inline-block;
+        margin-left: 15px;
+
+    }
+
+    #cart-total {
+        display: block;
+        text-align: center;
+        color: #fff;
+        background-color: red;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 14px;
+    } -->
+
+
+<style>
+    .input-group {
+        left: -95px;
+    }
+
+    .abd {
+        float: left;
+        margin-left: -15px;
+        margin-right: 30px;
+    }
+</style>
+
+<nav style="font-size: 20px; background-color: rgb(87, 139, 141); color: white;"
+    class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+        {% if request.user.is_authenticated %}
+
+        <div class="nav-item abd me-3 me-lg-1 active">
+            <a class="nav-link" href="{% url 'core:main' %} ">
+                <span><i class="fas fa-about fa-lg"> ABD</i></span>
+                <span class="badge rounded-pill badge-notification bg-danger"></span>
+            </a>
+        </div>
+
+        <form class="input-group w-auto mr-9 my-auto  d-none d-sm-flex">
+            <input autocomplete="off" type="search" class="form-control rounded" placeholder="Search"
+                style="min-width: 125px;" />
+            <span class="input-group-text border-0 d-none d-lg-flex"><i class="fas fa-search"></i></span>
+        </form>
+        <ul class="navbar-nav flex-row d-none d-md-flex">
+            <li class="nav-item me-3 m-5me-lg-1 active">
+                <a class="nav-link" href="{% url 'core:main' %} ">
+                    <span><i class="fas fa-home fa-lg"></i></span>
+                    <span class="badge rounded-pill badge-notification bg-danger"></span>
+                </a>
+            </li>
+            <li class="nav-item me-3 mr-6 me-lg-1">
+                <a class="nav-link" href="{% url 'core:Order-summary' %}">
+                    <span><i class="fas fa-shopping-cart fa-lg"></i></span>
+                    <span class="badge rounded-pill badge-notification bg-danger">{{ object.get_total_item }}</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div>
+
+            <a href="{% url 'account_logout' %}" class="btn btn-warning " id="logout"><span> تسجيل الخروج</span></a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        {% else %}
+
+        <ul>
+
+            <a class="navbar-brand waves-effect " href="{ url 'account_login' } " target="_blank">
+                <strong class="blue-text disabled">ِABD</strong>
+            </a>
+
+            <li class="navbar-brand waves-effect logout">
+                <a href="{% url 'account_signup' %}" class="btn btn-warning">انشاء حساب</a>
+            </li>
+
+        </ul>
+
+
+
+        {% endif %}
+    </div>
+
+    </div>
+</nav>  
+
+    {% block content %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+    {% include "script.html" %}
+    {% include "footer.html" %}
+
+</body>
+
+</html>

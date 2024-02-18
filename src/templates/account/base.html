@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block head_title %}{% endblock %}</title>
+  {% block extra_head %}
+  {% endblock %}
+
+<!-- Font Awesome -->
+</head>
+<style>
+
+</style>
+
+<body>
+  {% block body %}
+  <div>
+
+
+    {% if messages %}
+    <div>
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% block extra_body %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+
+  </div>
+  {% include "base.html" %}
+</body>
+
+</html>

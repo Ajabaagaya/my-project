@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+<style>
+
+    .image {
+
+        width: 140px;
+        height: 130px;
+        padding-top: 22px;
+        padding-right: 13px;
+        padding-left: 13px;
+        box-shadow: 1px 3px 4px;
+        padding-bottom: 13px;
+        margin-right: 5px;
+        border-radius: 70px;
+    }
+
+    /* .badge {
+
+        font-size: 10px;
+
+    } */
+
+    .wrapper {
+        max-height: 300px;
+        overflow-x: auto;
+        display: flex;
+        margin-bottom: 100px;
+    }
+
+    .wrapper::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .h5 {
+        margin-right: -100px;
+
+    }
+
+
+    .wrapper>div {
+
+        line-height: 100px;
+        text-align: center;
+    }
+
+
+</style>
+{% load static %}
+{% block content %}
+
+<!-- Navbar -->
+
+<main>
+
+
+
+  <div class="container mt-4 p-2">
+    <section class="text-center mb-4">
+
+
+      <div class="row wow fadeIn">
+        {% for item in object_list %}
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-3  ">
+
+          <div class="card">
+
+            <!--Card image-->
+            <div class="view overlay">
+              <a href="{{ item.get_Absolute_url }}">
+                <img src="{{ item.imageURL }}" class="image card-img-top">
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!--Card image-->
+
+            <!--Card content-->
+            <div class="card-body text-center">
+              <!--Category & Title-->
+              <a href="" class="grey-text">
+                <h5>{{ item.get_category }}</h5>
+              </a>
+              <h5>
+                <strong>
+                  <a href="{{ item.get_Absolute_url  }}" class="dark-grey-text" style="color: black;">{{ item.name }}
+                    <span class="badge badge-{{ item.get_label_display }}">{{ item.get_Version_display }}</span>
+                  </a>
+                </strong>
+              </h5>
+
+              <h4 class=" font-weight-bold blue-text">
+                <strong >
+                  {% if item.discount_price %}
+                  <del style="" class="">${{ item.price }}</del></strong>
+                <span style="">${{ item.discount_price }}</span>
+                {% else %}
+                ${{ item.price }}</strong>
+                {% endif %}
+              </h4>
+              <a style="float: left;
+               margin-left: -15px;" href="{% url 'core:add-to-home' item.id %}" class=" Update btn btn-primary ">اضافة
+                الى السلة</a>
+              <a style="float: right;" href="" class=" Update btn btn-outline-success ">View</a>
+            </div>
+
+            <!--Card content-->
+          </div>
+          <!--Card-->
+        </div>
+        <!--Grid column-->
+        {% endfor %}
+
+
+
+
+        <!--Grid column-->
+
+        <!--Fourth column-->
+
+        <!--Fourth column-->
+
+      </div>
+      <!--Grid row-->
+      
+    </section>
+    
+  </div>
+    {% if is_paginated %}
+
+     <nav class="d-flex justify-content-center wow fadeIn">
+      <ul class="pagination pg-blue">
+        {% if page_obj.has_previous %}
+        <li class="page-item ">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+          <a class="page-link" href="?page = {{ page_obj.number }}">{{ page_obj.number }}
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item ir">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        {% endif %} 
+
+       </ul>
+    </nav>
+    {% endif %} 
+    
+  </div>
+</main>
+
+<script>
+    const page = document.querySelector('.pagination');
+    document.addEventListener('DOMContentLoaded',()=>{
+      for(const i=2;i<=10 ; i++){
+        const il = document.createElement('li');
+        const span = document.createElement('span');
+        span.className ='sr-only'
+        const a = document.createElement('a');
+        a.className = 'page-link'
+        a.href ='#'
+        a.innerHTML =`${i}`
+        il.className ='page-item ir'
+        
+        a.appendChild(span)
+        il.appendChild(a)
+        page.appendChild(il)
+      }
+    })
+</script>
+{% endblock %}

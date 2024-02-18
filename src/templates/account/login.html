@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block content %}
+<style>
+  main {
+    border: 1px solid black;
+    text-align: center;
+
+
+  }
+  .top{
+    margin-top:-8%;
+  }
+
+  .fadeIn {
+    padding: 10px;
+    margin-left: 50px;
+  }
+
+  .bo {
+    text-align: center;
+    margin-left: 300px;
+    border: solid 1px black;
+    width: 4
+    0%;
+    border-radius: 12px;
+    margin-top: 30px;
+  }
+  
+  #h1 {
+      text-align: center;
+      padding-top: 10px;
+      
+    }
+    .h{
+    
+    border: solid 1px black;
+    display: inline;
+    padding: 34px;
+    background-color: green;
+    border-radius: 50%;
+    text-align:center;
+    margin-left: 50%;
+  }
+</style>
+
+
+<h1 class="h">ABD</h1>
+<div class="row wow fadeIn">
+  <!--Grid row-->
+  <div class="bo">
+
+          <!--Grid row-->
+          <h1 class="">{% trans "" %}</h1>
+
+          {% get_providers as socialaccount_providers %}
+
+          {% if socialaccount_providers %}
+          <p>{% blocktrans with site.name as site_name %}Please sign in with one
+            of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+            for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+          <div class="socialaccount_ballot">
+
+            <ul class="socialaccount_providers">
+              {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </ul>
+
+            <div class="login-or">{% trans 'or' %}</div>
+
+          </div>
+          {% endif %}
+          {% include "socialaccount/snippets/login_extra.html" %}
+
+
+          <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <a class="mr-2" href="{% url 'account_reset_password' %}">{% trans "forget the password " %}</a>
+
+
+            <button style="position: absolute;" class="btn btn-warning ml-" type="submit">{% trans "login" %}</button>
+          </form>
+          
+          <p id="h1">{% blocktrans %} you can
+            <a href="{{ signup_url }}">create a new account</a> {% endblocktrans %}
+          </p>
+        </div>
+      </div>
+
+{% endblock %}
