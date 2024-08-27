@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+</head>
+
+<body>
+
+{% include "product.html" %}
+    <div class="container mt-4 p-2">
+        <section class="text-center mb-4">
+
+            <div class="row wow fadeIn">
+                {% for item in object_list %}
+                <!--Grid column-->
+                <div class="col-lg-2 col-md-2 mb-2 p-2">
+
+                    <div class="card">
+
+                        <!--Card image-->
+                        <div class="view overlay">
+                            <a href="{{ item.get_Absolute_url }}"></a>
+                            <img src="{{ item.imageURL }}" class="card-img-top">
+                            <div class="mask rgba-white-slight"></div>
+
+                        </div>
+                        <!--Card image-->
+
+                        <!--Card content-->
+                        <div class="card-body text-center">
+                            <!--Category & Title-->
+
+                            <h5>
+                                <strong>
+                                    <a href="{{ item.get_Absolute_url }}" class="dark-grey-text" style="color: black;">
+                                        {{ item.name }}
+                                        <span class="badge badge-{{ item.get_label_display }}">
+                                            {{ item.get_Version_display }}</span>
+                                    </a>
+                                </strong>
+                            </h5>
+
+
+                        </div>
+                        <!--Card content-->
+
+                    </div>
+                    <!--Card-->
+                </div>
+                <!--Grid column-->
+                {% endfor %}
+            </div>
+            <!--Grid row-->
+
+        </section>
+</body>
+
+</html>

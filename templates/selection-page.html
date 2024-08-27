@@ -1,0 +1,264 @@
+{% extends "base.html "%}
+{% block content %}
+{% load static %}
+<!--Slides-->
+<style>
+    .move {
+        width: 300px;
+        margin-bottom: 5%;
+        position: relative;
+        animation-name: move;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes move {
+        0% {
+            margin-left: 0%;
+        }
+
+        50% {
+            margin-left: 70%;
+
+        }
+
+        90% {
+            margin-left: -100%;
+
+        }
+
+
+    }
+
+    /* .INNN {
+        max-height: 100px;
+        display: flex;
+        overflow-x: auto;
+
+
+    } */
+
+
+
+
+</style>
+<style>
+.image {
+
+    width: 200px;
+    height: 130px;
+    padding-top: 22px;
+    padding-right: 13px;
+    padding-left: 13px;
+    box-shadow: 1px 3px 4px;
+    padding-bottom: 13px;
+    margin-right: 5px;
+    border-radius: 70px;
+}
+
+/* .badge {
+
+    font-size: 10px;
+
+} */
+
+.wrapper {
+    max-height: 300px;
+    overflow-x: auto;
+    display: flex;
+    margin-bottom: 100px;
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 0;
+}
+
+.h5 {
+    margin-right: -100px;
+
+}
+
+
+.wrapper>div {
+
+    line-height: 100px;
+    text-align: center;
+}
+
+
+/* .hieght {
+    width: 200px;
+    height: 130px;
+    padding-top: 19px;
+    padding-right: 30px;
+    padding-left: 30px;
+    box-shadow: 1px 3px 4px;
+    padding-bottom: 40px;
+    border: 1px solid #ddd;
+
+    border-radius: 90px;
+} */
+</style>
+<div>
+    <img class="move" src="{% static 'images/cart.png' %}" alt="">
+</div>
+
+<!--/.Indicators-->
+
+<!--Slides-->
+<div class="carousel-inner" role="listbox">
+
+    <!--First slide-->
+    <div class="carousel-item active">
+        <div class="view"
+            style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%282%29.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+            <!-- Mask & flexbox options-->
+            <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+                <!-- Content -->
+                <div class="text-center white-text mx-5 wow fadeIn">
+                    <h1 class="mb-4">
+                        <strong> ABD مرحبا بكم زبائننا الكرام في موقع </strong>
+                    </h1>
+
+                    <p>
+                        <strong>افضل & وارقئ موقع لتوفير كل ما يهمكم وبسعار منخفظة ومناسبة</strong>
+                    </p>
+
+                    <p class="mb-4 d-none d-md-block">
+                        <strong>The most comprehensive tutorial for the Bootstrap 4. Loved by over 500 000 users.
+                            Video and
+                            written versions
+                            available. Create your own, stunning website.</strong>
+                    </p>
+
+
+                </div>
+                <!-- Content -->
+
+            </div>
+            <!-- Mask & flexbox options-->
+
+        </div>
+    </div>
+    <!--/First slide-->
+</div>
+
+
+</div>
+
+
+
+<div class="wrapper">
+    {% for section in sections %}
+
+    <div class="item">
+        <a href="{% url 'core:item-list' %}" class="dark-grey-text" style="top: 10px; color: black;">
+
+            <img class="image" src="{{ section.imageur }}">
+        </a>
+        <div>
+            <h5>
+
+
+                <a href="" class="dark-grey-text" style="top: 10px; color: black;">
+                    <strong>
+                        <span class=" ">
+                            {{ section.title }} </span>
+                    </strong>
+
+                </a>
+            </h5>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<hr class="">
+<h5 class=" font-weight-bold blue-text" style="text-align: center;">كل الاصناف </h5>
+<div class="carousel-inner">
+
+
+    <main>
+        <div class="container mt-4 p-2">
+            <section class="text-center mb-4">
+
+                <div class="row wow fadeIn">
+                    {% for item in items %}
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-3  ">
+
+                        <div class="card">
+
+                            <!--Card image-->
+                            <div class="view overlay">
+                                <a href=" {{ item.get_Absolute_url }}">
+                                    <img src="{{ item.imageURL }}" class="card-img-top">
+                                    <div class="mask rgba-white-slight"></div>
+                                </a>
+                            </div>
+                            <!--Card image-->
+
+                            <!--Card content-->
+                            <div class="card-body text-center">
+                                <!--Category & Title-->
+                                <a href="" class="grey-text">
+                                    <!-- <h5>{{ item.get_category_display }}</h5> -->
+                                </a>
+                                <h5>
+                                    <strong>
+                                        <a href="{{ item.get_Absolute_url }}" class="dark-grey-text"
+                                            style="color: black;">{{ item.name }}
+                                            <span class="badge badge-{{ item.get_label_display }}">
+                                                {{ item.get_Version_display }}</span>
+                                        </a>
+                                    </strong>
+                                </h5>
+
+                                <h4 class=" font-weight-bold blue-text">
+                                    <strong style="left: 10px; position:absolute;">
+                                        {% if item.discount_price %}
+                                        <del>${{ item.price }}</del></strong>
+                                    <span>${{ item.discount_price }}</span>
+                                    {% else %}
+                                    ${{ item.price }}</strong>
+                                    {% endif %}
+                                </h4>
+                            </div>
+
+                            <!--Card content-->
+
+                        </div>
+                        <!--Card-->
+                    </div>
+                    <!--Grid column-->
+                    {% endfor %}
+
+
+
+
+                    <!--Grid column-->
+
+                    <!--Fourth column-->
+
+                    <!--Fourth column-->
+
+                </div>
+                <!--Grid row-->
+
+            </section>
+
+        </div>
+    </main>
+
+
+
+
+
+</div>
+
+
+
+
+{% endblock %}

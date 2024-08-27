@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<style>
+  input {
+    width: 50%;
+    background: transparent;
+    background-color: white;
+  }
+
+
+  .signup {
+
+    box-shadow: inset 0 0em 0.1em,
+    0 0px 10px 1px ,
+    0px 11px 11px 0px;
+
+    margin-top: 20px;
+  }
+
+  form {
+    text-align: center;
+    float: left;
+  }
+
+  .avar {
+    width: 100px;
+    border-radius: 50%;
+    left: calc(0%);
+    top: -11%;
+  }
+
+
+  .br {
+  color: #FFF;
+  }
+  ul{
+    display: flex;
+  }
+  ul > il{
+    display: hide !important;
+  }
+</style>
+<div id="coo">
+
+  <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    <img class="avar" src="{% static 'images\LOG.jpg' %}">
+    <h1 class="br">{% trans "نشاء حساب" %}</h1>
+
+    <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+    </p>
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button class="btn btn-primary" type="submit">{% trans "Sign Up" %} &raquo;</button>
+  </form>
+</div>
+<br>
+
+
+<br>
+<script>
+  document.addEventListener("DOMContentLoaded",()=>{
+   li.set
+  },false)
+</script>
+{% endblock %}

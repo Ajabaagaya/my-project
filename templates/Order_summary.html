@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Navbar -->
+
+<style>
+    .table1{
+        padding:55px; float: right;
+        border: 1px solid black; 
+
+    }
+    .table1 .td,.th{
+        padding:5px; 
+        border: 1px solid black;
+        text-align: center; 
+    }
+
+</style>
+<main>
+    <div class="container mt-5 p-4">
+        <H1 class="text-center mb-5">تفاصيل السعر</H1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">اسم الصنف</th>
+                    <th scope="col">سعر</th>
+                    <th scope="col">مجموع السعر</th>
+                    <th scope="col">الكمية</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order_item in object.items.all %}
+                <tr>
+                    <th scope="row"><img style="width: 100px;" src="{{ order_item.item.imageURL }}"></th>
+                    <td>{{ order_item.item.name }}</td>
+                    {% if order_item.item.discount_price %}
+                    <td>${{ order_item.item.discount_price }}</td>
+
+                    {% else %}
+                    <td>${{ order_item.item.price }}</td>
+                    {% endif %}
+
+                    <td>
+                        {%if order_item.item.discount_price %}
+                        $ {{ order_item.get_save_price }}
+                        <span class="badge badge-primary">توفير ${{order_item.get_move_price }}</span>
+
+                        {% else %}
+                        ${{ order_item.get_total_price }}
+                        <span class="badge badge-primary"></span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'core:add-to-summary' order_item.item.id %}"
+                            data-product="{{order_item.item.id}}" class=" Update"><i class="fas fa-plus mr-2"></i></a>
+                        {{ order_item.quantity }}
+
+                        <a href="{% url 'core:remove-from-summary' order_item.item.id %}"
+                            class="fas fa-minus ml-2"><i></i></a>
+
+                        <a href="{% url 'core:remove-all' order_item.item.slug %}"> <i class="fas fa-trash"
+                                style="float: right; color: red;"></i></a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+                <div>
+                    <table class="table1">
+                        <tr >
+
+                            <th class="th">
+                                <strong >  مجموع السعر</strong>
+
+
+                            </th>
+                            <th class="th">
+                                <strong>عداد الاصناف</strong>
+
+
+                            </th>
+
+                        </tr>
+                        <tbody>
+
+                            <tr>
+                                <td class="hd">
+
+                                    <strong >
+                                        $ {{ object.get_total }}</strong>
+
+                                </td>
+                                <td class="td">
+                                    <strong >{{ object.get_total_item }}</strong>
+
+
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+
+                </td>
+
+
+
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ messages.tags }} " {% endif %}>
+
+
+
+
+            {{ message }}
+            </li>
+
+
+
+            {% endfor %}
+    </ul>
+    {% endif %}
+</main>
+<a class="btn btn-success " href="{% url 'core:checkout' %}"> الذهاب لدفع الكتروني
+</a>
+<!-- <script>
+    // var Updatebtn = document.getElementsByClassName('Update')
+    // var productId = null
+    // for (var i = 0; i < Updatebtn.length; i++) {
+    //     Updatebtn[i].addEventListener('click', function () {
+    //         productId = this.dataset.product
+    //     })
+    //     console.log("productId :", productId)
+    // }
+
+</script> -->
+{% endblock %}

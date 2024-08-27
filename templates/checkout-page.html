@@ -1,0 +1,200 @@
+{% extends "base.html "%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<style>
+
+</style>
+<form method="POST">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-primary" type="submit">Continue</button>
+</form> 
+
+
+<main>
+  <div class="container wow fadeIn">
+
+
+    <div class="row ">
+      {% if messages %}
+      <p> {{ message }}</p>
+      {% endif %}
+      <!--Grid column-->
+      <div class="col-md-8 mb-4">
+
+        <!--Card-->
+        <div class="card">
+
+          <!--Card content-->
+          <form method="POST" class="card-body">
+            {% csrf_token %}
+            <!--Grid row-->
+            <div class="row">
+
+            </div>
+            <!--Grid row-->
+
+            <div class="md-form mb-5">
+              <!-- <input type="text" id="email" class="form-control" placeholder="youremail@example.com"> -->
+
+              <label for="first" class="">First name</label>
+              {{ form.Image }}
+            </div>
+            <div class="md-form mb-5">
+              <!-- <input type="text" id="email" class="form-control" placeholder="youremail@example.com"> -->
+
+              <label for="first" class="">First name</label>
+              {{ form.first}}
+            </div>
+            <div class="md-form mb-5">
+              <!-- <input type="text" id="email" class="form-control" placeholder="youremail@example.com"> -->
+
+              <label for="last" class="">last name</label>
+              {{ form.last }}
+            </div>
+            <div class="md-form mb-5">
+              <!-- <input type="text" id="email" class="form-control" placeholder="youremail@example.com"> -->
+
+              <label for="email" class="">email</label>
+              {{ form.email }}
+            </div>
+
+
+            <!--address-->
+
+            <div class="row">
+
+              <div class="col-lg-3 col-md-12 mb-4">
+
+                <label for="country" class="float-right">الدولة</label>
+                <!-- <select class="custom-select d-block w-100" id="country" required>
+              <option value="">Choose...</option>
+              <option>United States</option>
+            </select> -->
+                {{ form.country }}
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+
+              </div>
+              <!--Grid column-->
+              <div class="col-lg-3 col-md-4 mb-4">
+                <!-- <label for="">المحافظة</label>
+            <select class="custom-select d-block w-100" id="state" required>
+
+              <option value="{{ value }}"> -->
+                <label for="state" class="float-right">المحافظة</label>
+                {{form.state }}
+
+                <!-- </select> -->
+
+              </div> -->
+              <!--Grid column-->
+
+              <!--address-2-->
+              <div class="md-form mb-5">
+                <label for="address-2" class="float-right">العنوان</label>
+                {{ form.address }}
+                <!-- <input type="text" id="address-2" class="form-control" placeholder="Apartment or suite"> -->
+              </div>
+
+
+              <hr>
+
+              <!-- <div class="custom-control custom-checkbox">
+              <input {% if form.billing_address.value %}checked{% endif %} name="billing_address" type="checkbox"
+                class="billing_address">
+              <label class="custom-control-label" for="billing-address">Shipping address is the same as my billing
+                address</label>
+            </div>
+            <br>
+            <div class="custom-control custom-checkbox">
+              <!-- <input {% if form.save_info.value %}checked{% endif %} name="save-info" type="checkbox" class="save_info"> -->
+              <!-- <label for="save-info">حافظ المعلومات من اجل عمليات الشراء القادمة</label>
+              {{form.save_info}}
+            </div> --> -->
+
+
+              <hr>
+            </div>
+            <div class="row">
+              <h5 class=" float-right mb-5">خيارات الدفع</h5>
+              <!-- <br>
+              <input id="{{ name }}" name="paymentMethod" value="{{ value }}" type="radio"
+                class=" custom-control-input m-4">
+
+              <label class="custom-control-label m-3 " for="{{ name }}">{{ name }}
+                <img width="300" src="{% static 'images/wallet.jpg' %}">
+              </label> --> -->
+
+              <div class="col-lg-4">
+                {% for value , name in form.fields.payment_option.choices %}
+                <!-- <img width="50" class="img" src="{{ pay.imageurl }}"> -->
+                <div class="custom-control  custom-radio ">
+                  <input id="{{ name }}" name="paymentMethod" value="{{ value }}" type="radio"
+                    class=" custom-control-input ">
+                  <label class="custom-control-label  bank-name" for="{{ name }}">{{ name }}
+                  </label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+
+
+            <!-- سبأكاش
+                  </label>
+                  <div class=" ty-payments-list__description">
+                    سبأكاش الدفع المباشر
+                </div>
+              </div> -->
+
+            <!-- <div class="custom-control custom-radio">
+                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="debit">Debit card</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="paypal">Paypal</label>
+              </div> -->
+            <!-- </div> -->
+            <!-- <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Name on card</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Credit card number</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+            </div> -->
+
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block"  type="submit">Continue to
+              checkout</button>
+
+          </form>
+
+        </div>
+        <!--/.Card-->
+      </div>
+
+    </div>
+
+  
+  </div>
+</main>
+
+
+
+
+
+{% endblock %}
