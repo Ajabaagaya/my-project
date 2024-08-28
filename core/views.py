@@ -15,7 +15,8 @@ from django.contrib import messages
 from django.core.mail import send_mail,BadHeaderError
  
 
-
+def get_items_selected(body):
+       return body.items
 class ListItem(ListView):
       model = Item
       paginate_by =4
