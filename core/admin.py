@@ -48,10 +48,10 @@ class BrandAdmin(admin.ModelAdmin):
       ]
       search_fields =['title']
       list_display = ['title','image']
-      view_on_site =True
-      actions_on_top =False
-      actions_on_bottom =True
-      change_form_template=True
+      # view_on_site =True
+      # actions_on_top =False
+      # actions_on_bottom =True
+      # change_form_template=True
 admin.site.register(OrderItem)
 admin.site.site_header='Store Management System'
 admin.site.index_title='الموج الارق'

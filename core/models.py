@@ -27,7 +27,7 @@ TIME_CHOICES = (
 )
 class Brand(models.Model):
 		title = models.CharField('اسم الفائة',max_length=100,null=True)
-		image =models.ImageField(upload_to='Brand_Photos',null =True)
+		image =models.ImageField(upload_to='media/Brand_Photos',null =True)
 
 			
 		@property
@@ -44,7 +44,7 @@ class Item(models.Model):
 		name = models.CharField('الاسم',max_length=100)
 		price = models.FloatField('السعر')
 		discount_price = models.FloatField('الخصم',null=True, blank=True)
-		image = models.ImageField(upload_to='Items_Photos', null=True, blank=True)
+		image = models.ImageField(upload_to='media/Items_Photos', null=True, blank=True)
 		selection= models.ManyToManyField(Brand,related_name='brands')
 		label= models.CharField(choices=LABEL_CHOICES, max_length=2)
 		Version= models.CharField(choices=TIME_CHOICES, max_length=2,null= True)
