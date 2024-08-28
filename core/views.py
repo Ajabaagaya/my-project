@@ -16,7 +16,9 @@ from django.core.mail import send_mail,BadHeaderError
  
 
 
+
 class ListItem(ListView):
+      print("goood work")
       model = Item
       paginate_by =4
       template_name = 'home-page.html'
