@@ -1,0 +1,118 @@
+{% load static %}
+<!-- Navbar -->
+<!-- <style>
+    span,
+    input {
+        border-radius: 20px;
+        text-align: center;
+    }
+
+    .search {
+        left: calc(75%);
+        position: absolute;
+    }
+
+    .logout {
+        left: calc(88%);
+        position: fixed;
+    }
+
+    #cart {
+        width: 25px;
+        display: inline-block;
+        margin-left: 15px;
+
+    }
+
+    #cart-total {
+        display: block;
+        text-align: center;
+        color: #fff;
+        background-color: red;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        font-size: 14px;
+    } -->
+
+
+<style>
+    .input-group {
+        left: -95px;
+    }
+
+    .abd {
+        float: left;
+        margin-left: -15px;
+        margin-right: 30px;
+    }
+</style>
+
+<nav style="font-size: 20px; background-color: rgb(87, 139, 141); color: white;"
+    class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+        {% if request.user.is_authenticated %}
+
+        <div class="nav-item abd me-3 me-lg-1 active">
+            <a class="nav-link" href="{% url 'core:main' %} ">
+                <span><i class="fas fa-about fa-lg"> ABD</i></span>
+                <span class="badge rounded-pill badge-notification bg-danger"></span>
+            </a>
+        </div>
+
+        <form class="input-group w-auto mr-9 my-auto  d-none d-sm-flex">
+            <input autocomplete="off" type="search" class="form-control rounded" placeholder="Search"
+                style="min-width: 125px;" />
+            <span class="input-group-text border-0 d-none d-lg-flex"><i class="fas fa-search"></i></span>
+        </form>
+        <ul class="navbar-nav flex-row d-none d-md-flex">
+            <li class="nav-item me-3 m-5me-lg-1 active">
+                <a class="nav-link" href="{% url 'core:main' %} ">
+                    <span><i class="fas fa-home fa-lg"></i></span>
+                    <span class="badge rounded-pill badge-notification bg-danger"></span>
+                </a>
+            </li>
+            <li class="nav-item me-3 mr-6 me-lg-1">
+                <a class="nav-link" href="{% url 'core:Order-summary' %}">
+                    <span><i class="fas fa-shopping-cart fa-lg"></i></span>
+                    <span class="badge rounded-pill badge-notification bg-danger">{{ user.request | count_total_items}}</span>
+                </a>
+            </li>
+
+        </ul>
+
+        <div>
+
+            <a href="{% url 'account_logout' %}" class="btn btn-warning " id="logout"><span> تسجيل الخروج</span></a>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        {% else %}
+
+        <ul>
+
+            <a class="navbar-brand waves-effect " href="{ url 'account_login' } " target="_blank">
+                <strong class="blue-text disabled">ِABD</strong>
+            </a>
+
+            <li class="navbar-brand waves-effect logout">
+                <a href="{% url 'account_signup' %}" class="btn btn-warning">انشاء حساب</a>
+            </li>
+
+        </ul>
+
+
+
+        {% endif %}
+    </div>
+
+    </div>
+</nav>
